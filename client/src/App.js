@@ -1,21 +1,29 @@
 import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Login from './pages/Login'
+import Nav from './components/Nav';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import User from './pages/User';
+
 
 function App() {
   return (
     <div className="App text-center">
-      <main className="form-signin text-center">
-        <form>
-          <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-          <div className="form-floating">
-            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
-          </div>
-          <div className="form-floating">
-            <input type="password" className="form-control" id="floatingPassword" placeholder="Password"/>
-          </div>
+      <BrowserRouter>
+      <Nav/>
+    <main className="form-signin text-center">
+      <Switch>
 
-          <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        </form>
+      <Route path="/" exact component={Home}/>
+      <Route path="/register" component={Register}/>
+      <Route path="/login" component={Login}/>
+      <Route path="/user" component={User}/>
+      </Switch>
+      
       </main>
+
+      </BrowserRouter>
     </div>
   );
 }
