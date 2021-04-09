@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { UserContext } from '../UserContext'
 
 const Home = () => {
+
+    const{user}=useContext(UserContext)
+
     return (
         <div>
-            Home
-            <img src="https://media1.tenor.com/images/a4a60f21d1430c0f45084d39807f37ea/tenor.gif?itemid=18273866" alt=""/>
+            
+            { user ? (<h1>Welcome back <span>{user.username}</span></h1>):(<h1>welcome on our site please login for discover stuff</h1>)}
         </div>
     )
 }

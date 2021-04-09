@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, {  useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { UserContext } from '../UserContext'
 
 
 const User = () => {
 
+    const{user,setUser}=useContext(UserContext)
 
-    const[username,setUsername] = useState('')
-    const[email,setEmail]=useState('')
 
-    useEffect(()=>{
-        ( async () => {
-            const response = await fetch('http://localhost:8000/api/user',{
-                headers:{'Content-Type':'application/json'},
-                credentials:'include',
-                })
-                const content = await response.json()
-                setUsername(content.username)
-                setEmail(content.email)
-                
-            })()
-    },[])
 
     const logout = async()=>{
         await fetch('http://localhost:8000/api/user/logout',{
@@ -27,12 +15,12 @@ const User = () => {
             headers:{'Content-Type': 'application/json'},
             credentials:'include'
         })
-        setUsername('')
+        setUser(null)
     }
     
     let link;
     
-    if(!username){
+    if(!user){
         link=(
             <Link to="/login"classname="btn btn-success">Login</Link>
         )
@@ -43,10 +31,10 @@ const User = () => {
     }
     return (
         <div>
-        {username?`user : ${username} ` :'Log-in to discover new stuff'}
+        {user?`user : ${user.username} ` :'Log-in to discover new stuff'}
         <br/>
-        {username?`Email : ${email}` :''}
-        <br/>
+        {user?`email : ${user.email} ` :''}
+
         <div>{link}</div>
         </div>
     )
